@@ -1,0 +1,812 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "en-NZ",
+    "dataSources": [
+      {
+        "name": "SqlServer localdbMSSQLLocalDB ProductSalesPerformance",
+        "connectionString": "Provider=MSOLEDBSQL;Data Source=(localdb)\\MSSQLLocalDB;Persist Security Info=false;Integrated Security=SSPI;Initial Catalog=ProductSalesPerformance",
+        "impersonationMode": "impersonateAccount",
+        "account": "anich",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "Date",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "name": "DateKey",
+            "dataType": "string",
+            "sourceColumn": "DateKey",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "isKey": true,
+            "sourceColumn": "Date",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "DayOfWeek",
+            "dataType": "string",
+            "sourceColumn": "DayOfWeek",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "Month",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Quarter",
+            "dataType": "string",
+            "sourceColumn": "Quarter",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Year",
+            "dataType": "int64",
+            "sourceColumn": "Year",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Holiday",
+            "dataType": "int64",
+            "sourceColumn": "Holiday",
+            "sourceProviderType": "Integer"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Date",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[Date].* FROM [dbo].[Date] ",
+              "dataSource": "SqlServer localdbMSSQLLocalDB ProductSalesPerformance"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Calendar",
+            "levels": [
+              {
+                "name": "Month",
+                "ordinal": 2,
+                "column": "Month"
+              },
+              {
+                "name": "Quarter",
+                "ordinal": 1,
+                "column": "Quarter"
+              },
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "Year"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Date].* FROM [dbo].[Date] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Date"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Product",
+        "columns": [
+          {
+            "name": "ProductID",
+            "dataType": "int64",
+            "sourceColumn": "ProductID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductName",
+            "dataType": "string",
+            "sourceColumn": "ProductName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "ProductNumber",
+            "dataType": "string",
+            "sourceColumn": "ProductNumber",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Color",
+            "dataType": "string",
+            "sourceColumn": "Color",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Size",
+            "dataType": "string",
+            "sourceColumn": "Size",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Weight",
+            "dataType": "double",
+            "sourceColumn": "Weight",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "ProductSubcategoryID",
+            "dataType": "string",
+            "sourceColumn": "ProductSubcategoryID",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "ProductCategoryID",
+            "dataType": "string",
+            "sourceColumn": "ProductCategoryID",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "ProductModelID",
+            "dataType": "string",
+            "sourceColumn": "ProductModelID",
+            "sourceProviderType": "Char"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Product",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[Product].* FROM [dbo].[Product] ",
+              "dataSource": "SqlServer localdbMSSQLLocalDB ProductSalesPerformance"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Categories",
+            "levels": [
+              {
+                "name": "ProductCategoryID",
+                "ordinal": 0,
+                "column": "ProductCategoryID"
+              },
+              {
+                "name": "ProductSubcategoryID",
+                "ordinal": 1,
+                "column": "ProductSubcategoryID"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Product].* FROM [dbo].[Product] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Product"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "ProductSalesPerformance",
+        "columns": [
+          {
+            "name": "SalesOrderID",
+            "dataType": "int64",
+            "sourceColumn": "SalesOrderID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductID",
+            "dataType": "int64",
+            "sourceColumn": "ProductID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductName",
+            "dataType": "string",
+            "sourceColumn": "ProductName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "ProductCategoryID",
+            "dataType": "int64",
+            "sourceColumn": "ProductCategoryID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ProductSubcategoryID",
+            "dataType": "int64",
+            "sourceColumn": "ProductSubcategoryID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ChannelType",
+            "dataType": "string",
+            "sourceColumn": "ChannelType",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "PromotionID",
+            "dataType": "int64",
+            "sourceColumn": "PromotionID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "SalesYear",
+            "dataType": "int64",
+            "sourceColumn": "SalesYear",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "TerritoryID",
+            "dataType": "int64",
+            "sourceColumn": "TerritoryID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "DateKey",
+            "dataType": "string",
+            "sourceColumn": "DateKey",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Quantity",
+            "dataType": "int64",
+            "sourceColumn": "TotalQuantity",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Sales",
+            "dataType": "double",
+            "sourceColumn": "TotalSales",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "Cost",
+            "dataType": "decimal",
+            "sourceColumn": "TotalCost",
+            "formatString": "\\$#,0.00;-\\$#,0.00;\\$#,0.00",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"5129\" DisplayName=\"$ English (New Zealand)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Profit",
+            "dataType": "double",
+            "sourceColumn": "TotalProfit",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "RevenuePerUnit",
+            "dataType": "double",
+            "sourceColumn": "RevenuePerUnit",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "AmountDue",
+            "dataType": "decimal",
+            "sourceColumn": "TotalDue",
+            "formatString": "\\$#,0.00;-\\$#,0.00;\\$#,0.00",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"5129\" DisplayName=\"$ English (New Zealand)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"1\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "PromotedSales",
+            "dataType": "double",
+            "sourceColumn": "PromotedSales",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "NonPromotedSales",
+            "dataType": "double",
+            "sourceColumn": "NonPromotedSales",
+            "sourceProviderType": "Numeric"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "ProductSalesPerformance",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[ProductSalesPerformance].* FROM [dbo].[ProductSalesPerformance] ",
+              "dataSource": "SqlServer localdbMSSQLLocalDB ProductSalesPerformance"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "NUMBER OF SALES ORDER",
+            "expression": " DISTINCTCOUNT(ProductSalesPerformance[SalesOrderID])"
+          },
+          {
+            "name": "TOTAL PRODUCTS",
+            "expression": " DISTINCTCOUNT(ProductSalesPerformance[ProductID])"
+          },
+          {
+            "name": "NUMBER OF PRODUCT CATEGORIES",
+            "expression": " DISTINCTCOUNT('ProductSalesPerformance'[ProductCategoryID])"
+          },
+          {
+            "name": "NUMBER OF PRODUCT SUBCATEGORIES SOLD",
+            "expression": " DISTINCTCOUNT(ProductSalesPerformance[ProductSubcategoryID])"
+          },
+          {
+            "name": "NUMBER OF UNITS SOLD",
+            "expression": " SUM(ProductSalesPerformance[Quantity])"
+          },
+          {
+            "name": "TOTAL REVENUE",
+            "expression": " ROUND(SUM(ProductSalesPerformance[Sales]),2)"
+          },
+          {
+            "name": "TOTAL COST",
+            "expression": " ROUND(SUM(ProductSalesPerformance[Cost]),2)"
+          },
+          {
+            "name": "TOTAL PROFIT",
+            "expression": " ROUND(SUM(ProductSalesPerformance[Profit]),2)"
+          },
+          {
+            "name": "AVERAGE REVENUE PER UNIT",
+            "expression": " ROUND(AVERAGE(ProductSalesPerformance[RevenuePerUnit]),2)"
+          },
+          {
+            "name": "TOTAL DUE",
+            "expression": " ROUND(SUM(ProductSalesPerformance[AmountDue]),2)"
+          },
+          {
+            "name": "TOTAL PROMOTED SALES",
+            "expression": " ROUND(SUM(ProductSalesPerformance[PromotedSales]),2)"
+          },
+          {
+            "name": "TOTAL NON-PROMOTED SALES",
+            "expression": " ROUND(SUM(ProductSalesPerformance[NonPromotedSales]),2)"
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[ProductSalesPerformance].* FROM [dbo].[ProductSalesPerformance] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "ProductSalesPerformance"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Promotion",
+        "columns": [
+          {
+            "name": "PromotionID",
+            "dataType": "int64",
+            "sourceColumn": "PromotionID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "PromotionType",
+            "dataType": "string",
+            "sourceColumn": "PromotionType",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "PromotionDiscount",
+            "dataType": "string",
+            "sourceColumn": "PromotionDiscount",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Promotion",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[Promotion].* FROM [dbo].[Promotion] ",
+              "dataSource": "SqlServer localdbMSSQLLocalDB ProductSalesPerformance"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Promotion].* FROM [dbo].[Promotion] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Promotion"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "SalesTerritory",
+        "columns": [
+          {
+            "name": "TerritoryID",
+            "dataType": "int64",
+            "sourceColumn": "TerritoryID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "TerritoryName",
+            "dataType": "string",
+            "sourceColumn": "TerritoryName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Country",
+            "dataType": "string",
+            "sourceColumn": "Country",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Region",
+            "dataType": "string",
+            "sourceColumn": "Region",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "SalesTerritory",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " SELECT [dbo].[SalesTerritory].* FROM [dbo].[SalesTerritory] ",
+              "dataSource": "SqlServer localdbMSSQLLocalDB ProductSalesPerformance"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Geography",
+            "levels": [
+              {
+                "name": "TerritoryName",
+                "ordinal": 2,
+                "column": "TerritoryName"
+              },
+              {
+                "name": "Country",
+                "ordinal": 1,
+                "column": "Country"
+              },
+              {
+                "name": "Region",
+                "ordinal": 0,
+                "column": "Region"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[SalesTerritory].* FROM [dbo].[SalesTerritory] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "SalesTerritory"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "5c04117f-b659-4ae5-8bd4-8348a017d7ee",
+        "fromTable": "ProductSalesPerformance",
+        "fromColumn": "DateKey",
+        "toTable": "Date",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "ca89efa7-6e62-4391-8afb-ece0a1104b65",
+        "fromTable": "ProductSalesPerformance",
+        "fromColumn": "ProductID",
+        "toTable": "Product",
+        "toColumn": "ProductID"
+      },
+      {
+        "name": "3b363690-4061-4985-9ec8-a72bc72976f2",
+        "fromTable": "ProductSalesPerformance",
+        "fromColumn": "PromotionID",
+        "toTable": "Promotion",
+        "toColumn": "PromotionID"
+      },
+      {
+        "name": "de9aba24-f59e-4281-b282-42b1f833a035",
+        "fromTable": "ProductSalesPerformance",
+        "fromColumn": "TerritoryID",
+        "toTable": "SalesTerritory",
+        "toColumn": "TerritoryID"
+      }
+    ],
+    "perspectives": [
+      {
+        "name": "ProductSales",
+        "tables": [
+          {
+            "name": "Date",
+            "columns": [
+              {
+                "name": "Date"
+              },
+              {
+                "name": "DateKey"
+              },
+              {
+                "name": "DayOfWeek"
+              },
+              {
+                "name": "Holiday"
+              },
+              {
+                "name": "Month"
+              },
+              {
+                "name": "Quarter"
+              },
+              {
+                "name": "Year"
+              }
+            ],
+            "hierarchies": [
+              {
+                "name": "Calendar"
+              }
+            ]
+          },
+          {
+            "name": "Product",
+            "columns": [
+              {
+                "name": "Color"
+              },
+              {
+                "name": "ProductCategoryID"
+              },
+              {
+                "name": "ProductID"
+              },
+              {
+                "name": "ProductModelID"
+              },
+              {
+                "name": "ProductName"
+              },
+              {
+                "name": "ProductNumber"
+              },
+              {
+                "name": "ProductSubcategoryID"
+              },
+              {
+                "name": "Size"
+              },
+              {
+                "name": "Weight"
+              }
+            ],
+            "hierarchies": [
+              {
+                "name": "Categories"
+              }
+            ]
+          },
+          {
+            "name": "ProductSalesPerformance",
+            "columns": [
+              {
+                "name": "AmountDue"
+              },
+              {
+                "name": "ChannelType"
+              },
+              {
+                "name": "Cost"
+              },
+              {
+                "name": "DateKey"
+              },
+              {
+                "name": "NonPromotedSales"
+              },
+              {
+                "name": "ProductCategoryID"
+              },
+              {
+                "name": "ProductID"
+              },
+              {
+                "name": "ProductName"
+              },
+              {
+                "name": "ProductSubcategoryID"
+              },
+              {
+                "name": "Profit"
+              },
+              {
+                "name": "PromotedSales"
+              },
+              {
+                "name": "PromotionID"
+              },
+              {
+                "name": "Quantity"
+              },
+              {
+                "name": "RevenuePerUnit"
+              },
+              {
+                "name": "Sales"
+              },
+              {
+                "name": "SalesOrderID"
+              },
+              {
+                "name": "SalesYear"
+              },
+              {
+                "name": "TerritoryID"
+              }
+            ],
+            "measures": [
+              {
+                "name": "AVERAGE REVENUE PER UNIT"
+              },
+              {
+                "name": "NUMBER OF PRODUCT CATEGORIES"
+              },
+              {
+                "name": "NUMBER OF PRODUCT SUBCATEGORIES SOLD"
+              },
+              {
+                "name": "NUMBER OF SALES ORDER"
+              },
+              {
+                "name": "NUMBER OF UNITS SOLD"
+              },
+              {
+                "name": "TOTAL COST"
+              },
+              {
+                "name": "TOTAL DUE"
+              },
+              {
+                "name": "TOTAL NON-PROMOTED SALES"
+              },
+              {
+                "name": "TOTAL PRODUCTS"
+              },
+              {
+                "name": "TOTAL PROFIT"
+              },
+              {
+                "name": "TOTAL PROMOTED SALES"
+              },
+              {
+                "name": "TOTAL REVENUE"
+              }
+            ]
+          },
+          {
+            "name": "Promotion",
+            "columns": [
+              {
+                "name": "EndDate"
+              },
+              {
+                "name": "PromotionDiscount"
+              },
+              {
+                "name": "PromotionID"
+              },
+              {
+                "name": "PromotionType"
+              },
+              {
+                "name": "StartDate"
+              }
+            ]
+          },
+          {
+            "name": "SalesTerritory",
+            "columns": [
+              {
+                "name": "Country"
+              },
+              {
+                "name": "Region"
+              },
+              {
+                "name": "TerritoryID"
+              },
+              {
+                "name": "TerritoryName"
+              }
+            ],
+            "hierarchies": [
+              {
+                "name": "Geography"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
